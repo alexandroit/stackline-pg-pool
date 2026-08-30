@@ -6,8 +6,8 @@
 - Prevented npm from auto-installing the historical `pg` dependency chain by
   removing the install-time peer edge while preserving runtime Client lookup.
 - Added direct and legacy-alias packed-install regression gates.
-- Replaced the vulnerable legacy test-tool chain with a dependency-free
-  `node:test` compatibility harness while preserving all upstream cases.
+- Replaced the vulnerable legacy test-tool chain with a dependency-free,
+  sequential compatibility harness while preserving all upstream cases.
 - Added dependency, compatibility, migration, security, provenance, and
   verification documentation.
 

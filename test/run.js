@@ -1,6 +1,6 @@
 'use strict'
 
-require('./support/harness')
+const harness = require('./support/harness')
 
 for (const file of [
   'connection-strings',
@@ -21,3 +21,8 @@ for (const file of [
 ]) {
   require(`./${file}.js`)
 }
+
+harness.run().catch((error) => {
+  console.error(error.stack || error)
+  process.exitCode = 1
+})

@@ -16,7 +16,7 @@
   },
   "scripts": {
     "test:upstream": "node test/run.js",
-    "test:contract": "node --test test/stackline-contract.test.js",
+    "test:contract": "node test/run-contract.js",
     "test:smoke": "node scripts/smoke-install.mjs",
     "check:package": "node scripts/check-package.mjs",
     "pack:check": "npm pack --dry-run --ignore-scripts",

@@ -17,9 +17,10 @@ implementation or prevent users from supplying `pg` explicitly.
 
 The upstream workspace also depended on Mocha, `expect.js`, `co`, Bluebird,
 and Lodash. A fresh development install produced a deprecated-package warning
-and three audit findings. The pool test suite now uses an in-repository harness
-built on `node:test`, and the package declares no development dependencies.
-A fresh source install therefore audits one package with zero findings.
+and three audit findings. The pool test suite now uses a dependency-free,
+in-repository sequential harness, and the package declares no development
+dependencies. A fresh source install therefore audits one package with zero
+findings.
 
 ## Release Gates
 
