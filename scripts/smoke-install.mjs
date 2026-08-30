@@ -49,8 +49,7 @@ assert.equal(pool.totalCount, 0)
   assert.equal(tree.problems, undefined)
   const installed = tree.dependencies[dependencyName]
   assert(installed)
-  assert.deepEqual(Object.keys(installed.dependencies || {}), ['pg'])
-  assert.deepEqual(installed.dependencies.pg, {})
+  assert.deepEqual(Object.keys(installed.dependencies || {}), [])
 
   const audit = JSON.parse(run(['audit', '--omit=dev', '--json'], consumer))
   assert.equal(audit.metadata.vulnerabilities.total, 0)

@@ -4,10 +4,10 @@ A maintained, dependency-clean build of `pg-pool`, compatible with the
 `pg-pool@3.14.0` public API.
 
 This package is part of the Stackline PostgreSQL compatibility chain. It keeps
-the historical `pg` peer available for standalone users but marks it optional,
-so npm does not silently install the old `pg -> pg-types -> xtend` production
-graph. `@stackline/pg` injects its Client constructor directly and therefore
-does not need that peer at runtime.
+the historical `pg` runtime fallback but does not declare it as an install-time
+peer, so npm cannot silently install the old `pg -> pg-types -> xtend`
+production graph. `@stackline/pg` injects its Client constructor directly and
+therefore does not need a separate driver at runtime.
 
 This is an independent fork of the MIT-licensed `brianc/node-postgres`
 project. It is not affiliated with or endorsed by the upstream maintainers.
@@ -37,7 +37,7 @@ Client constructor explicitly. `@stackline/pg` does this automatically.
 ## Security Properties
 
 - No production dependencies.
-- The `pg` peer is optional and is not auto-installed.
+- No `pg` peer is declared or auto-installed.
 - Clean packed installs are tested under both scoped and legacy alias names.
 - The complete default production graph must pass `npm ls --all` and
   `npm audit --omit=dev` with zero findings.

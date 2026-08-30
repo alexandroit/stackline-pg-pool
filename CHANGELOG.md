@@ -4,7 +4,7 @@
 
 - Forked the `pg-pool@3.14.0` runtime and public API.
 - Prevented npm from auto-installing the historical `pg` dependency chain by
-  declaring the existing `pg` peer optional.
+  removing the install-time peer edge while preserving runtime Client lookup.
 - Added direct and legacy-alias packed-install regression gates.
 - Replaced the vulnerable legacy test-tool chain with a dependency-free
   `node:test` compatibility harness while preserving all upstream cases.

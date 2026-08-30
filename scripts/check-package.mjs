@@ -12,8 +12,8 @@ assert.equal(packageJson.main, 'index.js')
 assert.equal(packageJson.type, 'commonjs')
 assert.deepEqual(packageJson.engines, { node: '>=16' })
 assert.equal(packageJson.dependencies, undefined)
-assert.deepEqual(packageJson.peerDependencies, { pg: '>=8.0' })
-assert.deepEqual(packageJson.peerDependenciesMeta, { pg: { optional: true } })
+assert.equal(packageJson.peerDependencies, undefined)
+assert.equal(packageJson.optionalDependencies, undefined)
 
 for (const file of [
   'index.js',

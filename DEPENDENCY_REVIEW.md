@@ -12,9 +12,8 @@ installation of that package therefore installed `pg@8.23.0` and its complete
 14-package closure, including `pg-types@2.2.0`, `postgres-interval@1.2.0`, and
 archived `xtend@4.0.2`.
 
-The fork keeps the same peer range and marks it optional. This removes the
-implicit edge without changing the pool implementation or preventing users
-from supplying `pg` explicitly.
+The fork removes that install-time peer edge. This does not change the pool
+implementation or prevent users from supplying `pg` explicitly.
 
 The upstream workspace also depended on Mocha, `expect.js`, `co`, Bluebird,
 and Lodash. A fresh development install produced a deprecated-package warning

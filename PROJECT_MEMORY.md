@@ -10,7 +10,8 @@
 ## Permanent Decisions
 
 - Preserve the upstream runtime implementation and API.
-- Keep the historical `pg >=8.0` peer optional.
+- Keep `pg` out of package dependency and peer metadata; standalone users
+  install it explicitly or inject a Client.
 - Never add an ordinary production dependency without recursively reviewing
   its complete installed closure.
 - Test both direct scoped and legacy npm-alias installation paths.

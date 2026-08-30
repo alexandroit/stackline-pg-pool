@@ -1,7 +1,7 @@
 # Publishing
 
-1. Run the full monorepo build and upstream pool suite with PostgreSQL.
-2. Run `npm run verify` from `packages/pg-pool`.
+1. Run the complete upstream pool suite with PostgreSQL.
+2. Run `npm run verify` from the repository root.
 3. Commit the frozen source and create the annotated package tag.
 4. Run `npm run artifact:prepare` from a clean worktree.
 5. Publish the exact generated tarball to Verdaccio and repeat every consumer

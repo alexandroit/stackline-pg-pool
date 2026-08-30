@@ -25,6 +25,6 @@ test('accepts an injected Client without resolving an external driver', () => {
 
 test('does not auto-install the historical pg dependency chain', () => {
   assert.deepEqual(packageJson.dependencies, undefined)
-  assert.deepEqual(packageJson.peerDependencies, { pg: '>=8.0' })
-  assert.deepEqual(packageJson.peerDependenciesMeta, { pg: { optional: true } })
+  assert.deepEqual(packageJson.peerDependencies, undefined)
+  assert.deepEqual(packageJson.optionalDependencies, undefined)
 })

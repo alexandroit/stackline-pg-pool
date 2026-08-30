@@ -17,10 +17,10 @@ The supported runtime is Node.js 16 or newer, matching `pg@8.23.0`.
 
 ## Intentional Packaging Difference
 
-The historical `pg >=8.0` peer remains declared but is optional. Modern npm
-therefore does not auto-install `pg` when the pool is installed by itself.
-Applications that instantiate the standalone pool without injecting a Client
-must install `pg`, use the legacy alias, or use `@stackline/pg`.
+The historical `pg >=8.0` peer is not declared. Modern npm therefore cannot
+auto-install `pg` when the pool is installed by itself. Applications that
+instantiate the standalone pool without injecting a Client must install `pg`,
+use the legacy alias, or use `@stackline/pg`.
 
 This matches the peer-dependency installation behavior that consumers had
 before npm 7 while preventing an implicit legacy dependency graph.
