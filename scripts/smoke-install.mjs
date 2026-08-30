@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -66,7 +66,14 @@ try {
     'pack', '--silent', '--json', '--ignore-scripts', '--pack-destination', temporary
   ]))
   assert.equal(packed.length, 1)
-  const archive = path.join(temporary, packed[0].filename)
+  let archive = path.join(temporary, packed[0].filename)
+  try {
+    await access(archive)
+  } catch {
+    // npm 8 reports scoped tarballs as "@scope/name.tgz" but writes "scope-name.tgz".
+    archive = path.join(temporary, packed[0].filename.replace(/^@([^/]+)\//, '$1-'))
+    await access(archive)
+  }
   await verifyConsumer('scoped-consumer', '@stackline/pg-pool', archive)
   await verifyConsumer('legacy-alias-consumer', 'pg-pool', archive)
   console.log('Packed direct and legacy-alias installs have an empty production closure.')
