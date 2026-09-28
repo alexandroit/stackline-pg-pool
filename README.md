@@ -1,5 +1,20 @@
 # @stackline/pg-pool
 
+> Dependency-clean connection pool compatible with pg-pool 3.14.0
+
+[![npm version](https://img.shields.io/npm/v/@stackline/pg-pool.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/pg-pool)
+[![license](https://img.shields.io/npm/l/@stackline/pg-pool.svg?style=flat-square)](https://github.com/alexandroit/stackline-pg-pool/blob/main/LICENSE)
+[![GitHub repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-pg-pool)
+
+**[Documentation](https://alexandro.net/docs/vanilla/pg-pool/)** |
+**[npm](https://www.npmjs.com/package/@stackline/pg-pool)** |
+**[Issues](https://github.com/alexandroit/stackline-pg-pool/issues)** |
+**[Repository](https://github.com/alexandroit/stackline-pg-pool)**
+
+**Package version:** `1.0.1`
+
+## Why this package?
+
 A maintained, dependency-clean build of `pg-pool`, compatible with the
 `pg-pool@3.14.0` public API.
 
@@ -12,9 +27,23 @@ therefore does not need a separate driver at runtime.
 This is an independent fork of the MIT-licensed `brianc/node-postgres`
 project. It is not affiliated with or endorsed by the upstream maintainers.
 
-## Install
+## Compatibility
+
+| Item | Value |
+| --- | --- |
+| Package | `@stackline/pg-pool@1.0.1` |
+| Node.js runtime | `>=16` |
+| CommonJS / primary entry | `index.js` |
+
+## Installation
+
+<a id="install"></a>
+
+### Install
 
 Direct scoped import:
+
+## Usage
 
 ```sh
 npm install @stackline/pg-pool
@@ -34,31 +63,11 @@ Existing `require('pg-pool')` and ESM default imports then remain unchanged.
 When using the pool by itself, install a compatible PostgreSQL Client or pass a
 Client constructor explicitly. `@stackline/pg` does this automatically.
 
-## Security Properties
+<a id="use"></a>
 
-- No production dependencies.
-- No `pg` peer is declared or auto-installed.
-- Clean packed installs are tested under both scoped and legacy alias names.
-- The complete default production graph must pass `npm ls --all` and
-  `npm audit --omit=dev` with zero findings.
+### use
 
-See [DEPENDENCY_REVIEW.md](DEPENDENCY_REVIEW.md),
-[COMPATIBILITY.md](COMPATIBILITY.md), and [SECURITY.md](SECURITY.md).
-
-## API Guide
-
-A connection pool for node-postgres. The examples below use the legacy alias
-installation, so the original `require('pg-pool')` calls are preserved.
-
-### Legacy alias install
-
-```sh
-npm install pg-pool@npm:@stackline/pg-pool pg
-```
-
-## use
-
-### create
+#### create
 
 to use pg-pool you must first create an instance of a pool
 
@@ -94,7 +103,7 @@ const PgNativeClient = require('pg-native')
 const pgNativePool = new Pool({ Client: PgNativeClient })
 ```
 
-##### Note:
+###### Note:
 
 The Pool constructor does not support passing a Database URL as the parameter. To use pg-pool on heroku, for example, you need to parse the URL into a config object. Here is an example of how to parse a Database URL.
 
@@ -129,7 +138,7 @@ const pool = new Pool(config)
 */
 ```
 
-### acquire clients with a promise
+#### acquire clients with a promise
 
 pg-pool supports a fully promise-based api for acquiring clients
 
@@ -149,7 +158,7 @@ pool.connect().then((client) => {
 })
 ```
 
-### plays nice with async/await
+#### plays nice with async/await
 
 this ends up looking much nicer if you're using [co](https://github.com/tj/co) or async/await:
 
@@ -178,7 +187,7 @@ co(function* () {
 }).catch((e) => console.error(e.message, e.stack))
 ```
 
-### your new favorite helper method
+#### your new favorite helper method
 
 because its so common to just run a query and return the client to the pool afterward pg-pool has this built-in:
 
@@ -203,7 +212,7 @@ have some other edge case like [streaming rows](https://github.com/brianc/node-p
 you should almost always just use `pool.query`. Its easy, it does the right thing :tm:, and wont ever forget to return
 clients back to the pool after the query is done.
 
-### drop-in backwards compatible
+#### drop-in backwards compatible
 
 pg-pool still and will always support the traditional callback api for acquiring a client. This is the exact API node-postgres has shipped with for years:
 
@@ -222,7 +231,7 @@ pool.connect((err, client, done) => {
 })
 ```
 
-### shut it down
+#### shut it down
 
 When you are finished with the pool if all the clients are idle the pool will close them after `config.idleTimeoutMillis` and your app
 will shutdown gracefully. If you don't want to wait for the timeout you can end the pool as follows:
@@ -235,7 +244,7 @@ client.release()
 await pool.end()
 ```
 
-### a note on instances
+#### a note on instances
 
 The pool should be a **long-lived object** in your application. Generally you'll want to instantiate one pool when your app starts up and use the same instance of the pool throughout the lifetime of your application. If you are frequently creating a new pool within your code you likely don't have your pool initialization code in the correct place. Example:
 
@@ -263,11 +272,11 @@ module.exports.connect = () => {
 }
 ```
 
-### events
+#### events
 
 Every instance of a `Pool` is an event emitter. These instances emit the following events:
 
-#### error
+##### error
 
 Emitted whenever an idle client in the pool encounters an error. This is common when your PostgreSQL server shuts down, reboots, or a network partition otherwise causes it to become unavailable while your pool has connected clients.
 
@@ -285,7 +294,7 @@ pool.on('error', function (error, client) {
 })
 ```
 
-#### connect
+##### connect
 
 Fired whenever the pool creates a **new** `pg.Client` instance and successfully connects it to the backend.
 
@@ -312,7 +321,7 @@ pool
   .then((client) => client.release())
 ```
 
-#### acquire
+##### acquire
 
 Fired whenever a client is acquired from the pool
 
@@ -344,7 +353,7 @@ setTimeout(function () {
 }, 100)
 ```
 
-### environment variables
+#### environment variables
 
 pg-pool & node-postgres support some of the same environment variables as `psql` supports. The most common are:
 
@@ -358,7 +367,11 @@ PGSSLMODE=require
 
 Usually I will export these into my local environment via a `.env` file with environment settings or export them in `~/.bash_profile` or something similar. This way I get configurability which works with both the postgres suite of tools (`psql`, `pg_dump`, `pg_restore`) and node, I can vary the environment variables locally and in production, and it supports the concept of a [12-factor app](http://12factor.net/) out of the box.
 
-## maxUses and read-replica autoscaling (e.g. AWS Aurora)
+## Features and Integrations
+
+<a id="maxuses-and-read-replica-autoscaling-eg-aws-aurora"></a>
+
+### maxUses and read-replica autoscaling (e.g. AWS Aurora)
 
 The maxUses config option can help an application instance rebalance load against a replica set that has been auto-scaled after the connection pool is already full of healthy connections.
 
@@ -383,15 +396,81 @@ maxUses = rebalanceWindowSeconds * totalRequestsPerSecond / numAppInstances / po
    7200 =        1800            *          1000          /        10       /    25
 ```
 
-## tests
+## Security
+
+<a id="security-properties"></a>
+
+### Security Properties
+
+- No production dependencies.
+- No `pg` peer is declared or auto-installed.
+- Clean packed installs are tested under both scoped and legacy alias names.
+- The complete default production graph must pass `npm ls --all` and
+  `npm audit --omit=dev` with zero findings.
+
+See [DEPENDENCY_REVIEW.md](https://github.com/alexandroit/stackline-pg-pool/blob/main/DEPENDENCY_REVIEW.md),
+[COMPATIBILITY.md](https://github.com/alexandroit/stackline-pg-pool/blob/main/COMPATIBILITY.md), and [SECURITY.md](https://github.com/alexandroit/stackline-pg-pool/blob/main/SECURITY.md).
+
+## API Surface
+
+<a id="api-guide"></a>
+
+### API Guide
+
+A connection pool for node-postgres. The examples below use the legacy alias
+installation, so the original `require('pg-pool')` calls are preserved.
+
+#### Legacy alias install
+
+```sh
+npm install pg-pool@npm:@stackline/pg-pool pg
+```
+
+## Local Development
+
+```sh
+git clone https://github.com/alexandroit/stackline-pg-pool.git
+cd stackline-pg-pool
+npm ci
+npm run verify
+```
+
+Release tooling uses Node.js 24.20.0 and npm 11.19.0. The consumer runtime contract remains the one documented above.
+
+<a id="tests"></a>
+
+### tests
 
 To run tests clone the repo, `npm i` in the working dir, and then run `npm test`
 
-## contributions
+<a id="contributions"></a>
+
+### contributions
 
 I love contributions. Please make sure they have tests, and submit a PR. If you're not sure if the issue is worth it or will be accepted it never hurts to open an issue to begin the conversation. If you're interested in keeping up with node-postgres releated stuff, you can follow me on twitter at [@briancarlson](https://twitter.com/briancarlson) - I generally announce any noteworthy updates there.
 
-## license
+## Consumer Smoke Test
+
+Run the repository's existing consumer/package check after installing development dependencies:
+
+```sh
+npm run test:smoke
+```
+
+## Release Checklist
+
+Run `npm run verify` and inspect the package contents before release. Publish a new version through the [GitHub Actions publishing workflow](https://github.com/alexandroit/stackline-pg-pool/actions/workflows/publish.yml), using the SHA-512 digest of the reviewed tarball. Verify the exact published version, tarball integrity, and npm provenance after the run.
+
+## Community and Support
+
+Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/stackline-pg-pool/issues). Use the [security policy](https://github.com/alexandroit/stackline-pg-pool/blob/main/SECURITY.md) for vulnerability reports.
+
+- [Stackline / Alexandro.Net](https://alexandro.net/)
+- [GitHub](https://github.com/alexandroit)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
+
+## License
 
 The MIT License (MIT)
 Copyright (c) 2016 Brian M. Carlson
