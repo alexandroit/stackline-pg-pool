@@ -86,7 +86,7 @@ jobs:
           actual="$(sha512sum artifact/*.tgz | awk '{print $1}')"
           test "$actual" = "$expected"
           (cd artifact && sha512sum *.tgz > SHA512SUMS)
-          npm sbom --omit=dev --sbom-format cyclonedx > artifact/sbom.cdx.json
+          npm sbom --package-lock-only --omit=dev --sbom-format cyclonedx > artifact/sbom.cdx.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: npm-release
