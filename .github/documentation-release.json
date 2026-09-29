@@ -1,0 +1,28 @@
+{
+  "repository": "alexandroit/stackline-pg-pool",
+  "packages": [
+    {
+      "name": "@stackline/pg-pool",
+      "path": "README.md",
+      "version": "1.0.2",
+      "baselineVersion": "1.0.1",
+      "keywords": [
+        "stackline",
+        "npm-package",
+        "pg-pool",
+        "nodejs",
+        "pg",
+        "postgres",
+        "pool",
+        "database",
+        "postgresql",
+        "connection-pool"
+      ],
+      "homepage": "https://alexandro.net/docs/vanilla/pg-pool/",
+      "baselineTarball": "https://registry.npmjs.org/@stackline/pg-pool/-/pg-pool-1.0.1.tgz",
+      "baselineIntegrity": "sha512-cL8TIaDwYtmiz69EMSVUysKIGpMqyorcr8OvppP6j9rZYoWn5RPGG3l6t/RdiGiUrGCUVukVnTiWo0088u5WVg==",
+      "expectedSha512": "e6636efffa0d3fcddd0dccd8485ca6680106267d9c0e34cf8190747570e9a885f6e3dc2713d07c4650d899a2aa4ef15ff2f0899c7c32cce766980a4c1fbe8fec",
+      "tag": "docs-stackline-pg-pool-v1.0.2"
+    }
+  ]
+}
