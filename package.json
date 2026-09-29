@@ -1,6 +1,6 @@
 {
   "name": "@stackline/pg-pool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Dependency-clean connection pool compatible with pg-pool 3.14.0",
   "type": "commonjs",
   "main": "index.js",
